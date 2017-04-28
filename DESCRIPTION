@@ -1,0 +1,19 @@
+Package: concavex
+Title: Concavex Bayesian Dose-Response Modeling
+Version: 0.1
+Date: 2017-02-17
+Description: Tools for fitting and visualizing dose-response models using the Bayesian Concavex approach
+Authors@R: c(person("Paul", "Manser", role = c("cre", "aut"),
+                    email = "paulmanser26@gmail.com"),
+             person("Michel", "Friesenhahn", role = "aut"))
+License: MIT
+Collate: ccvx_build_jags.R
+         ccvx_fit.R
+         ccvx_plot_fit.R
+         ccvx_hist_post.R
+Depends: stats,
+         methods,
+         rjags,
+         coda
+Suggests: testthat
+RoxygenNote: 6.0.1
