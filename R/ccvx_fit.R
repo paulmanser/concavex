@@ -32,6 +32,10 @@ ccvx_fit <- function(ccvx.mod, doses, mu.hat, stderr, n.chains = 4, gibbs.sample
                                c("theta_0", "theta_1", "lambda", "mu.tilde", "dose.post", "trt.post"),
                                n.iter = gibbs.samples)
   
-  out <- list(ccvx.mod = ccvx.mod, jags.samples = ccvx.samples, doses = doses, mu.hat = mu.hat, stderr = stderr)
+  # diagnostics with coda
+  coda.samples <- coda.samples(model.init, c("theta_0", "theta_1", "lambda"), gibbs.samples)
+  
+  out <- list(ccvx.mod = ccvx.mod, jags.samples = ccvx.samples, coda.samples = coda.samples,
+              doses = doses, mu.hat = mu.hat, stderr = stderr)
   out
 }
