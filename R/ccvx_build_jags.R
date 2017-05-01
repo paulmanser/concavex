@@ -1,6 +1,10 @@
 #' Build Concavex JAGS code
 #' 
-#' This function creates JAGS code within R for fitting the Concavex model. Will eventually allow for flexible specification of priors and extracting DDCPs, predictive probabilities, etc.
+#' This function creates JAGS code within R for fitting the Concavex model. Has default non-informative priors for model parameters, but allows for specification of custom priors written in JAGS syntax
+#' 
+#' @param prior.theta_0  Prior for theta_0 specified in terms of JAGS code. The default is a non-informative normal prior: 'theta_0 ~ dnorm(0, 1E-4)'
+#' @param prior.theta_1  Prior for theta_1 specified in terms of JAGS code. The default is a non-informative normal prior: 'theta_1 ~ dnorm(0, 1E-4)'
+#' @param prior.lambda   Prior for lambda specified in terms of JAGS code. The default is a non-informative uniform prior: 'lambda ~ dunif(-.999, .999)' 
 #' 
 #' @export
 #' @examples 
@@ -8,7 +12,10 @@
 #' cat(ccvx.jags.mod)
 
 
-ccvx_build_jags <- function() {
+ccvx_build_jags <- function(prior.theta_0 = "theta_0 ~ dnorm(0, 1E-4)", 
+                            prior.theta_1 = "theta_1 ~ dnorm(0, 1E-4)", 
+                            prior.lambda = "lambda ~ dunif(-.999, .999)") {
+  paste0(
   "
   model{
     
@@ -24,13 +31,13 @@ ccvx_build_jags <- function() {
 
     # specify priors --------------------------------------------------------
     
-    theta_0 ~ dnorm(0, 1E-4)   # non-informative normal prior on theta_0
-    
-    theta_1 ~ dnorm(0, 1E-4)   # non-informative normal prior on theta_1
-    
-    # flat prior on lambda over (-1, 1)
-    lambda ~ dunif(-.999, .999)  
-    
+    ", 
+  
+    prior.theta_0, "\n\n    ", 
+    prior.theta_1, "\n\n    ", 
+    prior.lambda, "\n",
+
+    "
     # transformations --------------------------------------------------------
 
     ## posterior credible intervals for d-r curve
@@ -46,4 +53,5 @@ ccvx_build_jags <- function() {
     
   }
   "
+  )
 }
