@@ -59,14 +59,14 @@ ccvx_plot_fit <- function(ccvx.samples, placebo.adjusted = FALSE,
   }
 
   # plot point estimates with std err bars
-  plot(x.vals, y.vals, type = 'n', cex.lab = 1.4,
+  plot(x.vals, y.vals, type = 'n', 
        xlab = xlab, ylab = ylab,
        xlim = range(ccvx.samples$doses),
        ylim = c(min(pci.ll), max(pci.ul)),
        main = paste0("Concavex Dose-Response Curve with \n", 100*cred.int.width, "% Credible Interval"))
   grid(lwd = 2)
   
-  points(x.vals, y.vals, pch = 16, cex = 1.5)
+  points(x.vals, y.vals, pch = 16, cex = 1.3)
   arrows(x.vals, 
          y.vals - abs(qnorm(delta)) * stderr, 
          x.vals, 
