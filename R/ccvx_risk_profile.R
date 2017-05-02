@@ -7,11 +7,9 @@
 #' @export
 #' @examples 
 #' ccvx.mod <- ccvx_build_jags()
-#' ccvx.samples <- ccvx_fit(ccvx.mod, doses = 0:4, mu.hat = c(1, 20, 50, 60, 65), stderr = rep(10, 5))
+#' ccvx.samples <- ccvx_fit(ccvx.mod, doses = 0:4, mu.hat = c(1, 20, 50, 60, 65), stderr = rep(20, 5))
 #' par(mfrow=c(1,2))
-#' ccvx_plot_fit(ccvx.samples, placebo.adjusted = FALSE)
-#' ccvx_plot_fit(ccvx.samples, placebo.adjusted = TRUE)
-
+#' ccvx_risk_profile(ccvx.samples)
 
 
 ccvx_risk_profile <- function(ccvx.samples, eff.thresholds = NULL) {
@@ -70,7 +68,7 @@ ccvx_risk_profile <- function(ccvx.samples, eff.thresholds = NULL) {
     lines(trt.eff.range, eff.mat[, jj], col = jj, lwd = 2)
   }
 
-  legend("bottomleft", cex = 1.3, legend= doses, fill = 1:length(doses), border = NA)
+  legend("bottomleft", legend= doses, fill = 1:length(doses), border = NA)
 
 }
 
