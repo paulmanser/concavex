@@ -55,7 +55,7 @@ ccvx_plot_fit <- function(ccvx.samples, placebo.adjusted = FALSE,
     y <- theta_1_median * (((((1-lambda_median)/2)^2 + lambda_median)/(((1-lambda_median)/2)^2 + lambda_median*dose.range))*dose.range)
     y.vals <- ccvx.samples$mu.hat[-1] - ccvx.samples$mu.hat[1]
     x.vals <- ccvx.samples$doses[-1]
-    stderr <- sqrt(2 * (ccvx.samples$stderr[-1]^2))
+    stderr <- sqrt(ccvx.samples$stderr[1]^2 + (ccvx.samples$stderr[-1]^2))
   }
 
   # plot point estimates with std err bars
