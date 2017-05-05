@@ -1,20 +1,24 @@
 #' Plot Concavex model risk profiles 
 #' 
-#' Function to plot Concavex model risk profiles by effect size and dose
+#' Function to plot Concavex model risk profiles. Specifically, probabilities of exceeding efficacy thresholds
+#' are plotted against doses tested, and against specific thresholds of interest. If no thresholds are specified in 
+#' 'eff.thresholds' argument, only the plot against dose is generated.
 #' 
 #' @param ccvx.samples List containg Gibbs samples output by ccvx_fit() function
+#' @param eff.thresholds A list of efficacy thresholds of specific interest for which to compute probabilities
 #' 
 #' @export
 #' @examples 
 #' ccvx.mod <- ccvx_build_jags()
 #' ccvx.samples <- ccvx_fit(ccvx.mod, doses = 0:4, mu.hat = c(1, 20, 50, 60, 65), stderr = rep(20, 5))
 #' par(mfrow=c(1,2))
-#' ccvx_risk_profile(ccvx.samples)
+#' ccvx_risk_profile(ccvx.samples, eff.thresholds = c(5, 10, 20, 40))
 
 
 ccvx_risk_profile <- function(ccvx.samples, eff.thresholds = NULL) {
   
-  # if(!is.na(eff.thresholds)) {
+  if(!is.null(eff.thresholds)) {
+    
     # dose prob plot fix eff ---------------------------------------------------------------
     eff.mat <- matrix(nr = dim(ccvx.samples$jags.samples$trt.post)[1],
                       nc = length(eff.thresholds))
@@ -40,11 +44,10 @@ ccvx_risk_profile <- function(ccvx.samples, eff.thresholds = NULL) {
     legend("bottomright",
            legend = eff.thresholds,
            fill = 1:length(eff.thresholds), border = NA)
-  # }
+  }
   
 
   # p for tested doses ------------------------------------------------------
-   
   doses <- ccvx.samples$doses
   trt.eff.range <- seq(0, quantile(ccvx.samples$jags.samples$theta_1, probs = .95), length.out = 250)
 
