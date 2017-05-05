@@ -1,9 +1,9 @@
 #' Plot Concavex model fit 
 #' 
-#' This function plots the Concavex model fit overlaid with parameter estimates and standard errors for each dose
+#' This function plots posterior distributions for the 3 parameters of the Concavex model
 #' 
 #' @param ccvx.samples   List containg Gibbs samples output by ccvx_fit() function
-#' @param cred.int.width Specify width of credible interval for posteriors
+#' @param cred.int.width Specify width of credible interval for posteriors. Default is .9 (90\% credible interval)
 #' 
 #' @export
 #' @examples 
