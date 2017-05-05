@@ -13,6 +13,7 @@ Collate: concavex.R
          ccvx_plot_fit.R
          ccvx_hist_post.R
          ccvx_risk_profile.R
+         open_doc.R
 Depends: stats,
          methods,
          rjags,
