@@ -3,12 +3,12 @@
 #' Function to plot Concavex model fit overlaid on actual points
 #' 
 #' @param ccvx.samples List containg Gibbs samples output by ccvx_fit() function
-#' @param placebo.adjusted Should estimate of dose-response curve be placebo adjusted? Default is FALSE
-#' @param cred.int.width Specify width of credible interval for curve. Is also applied to confidence intervals of point estimates. Default is 0.9 (90\%)
+#' @param placebo.adjusted Should the estimated dose-response curve be placebo adjusted? Default is FALSE
+#' @param cred.int.width Specify width of credible interval for curve. This is also applied to confidence intervals of point estimates. Default is 0.9 (90\%)
 #' @param title Plot title
-#' @param xlab Label for X-axis
+#' @param xlab Label for x-axis
 #' @param ylab Label for y-axis
-#' 
+#' @author Paul Manser, \email{manser.paul@gene.com}
 #' @export
 #' @examples 
 #' ccvx.mod <- ccvx_build_jags()
@@ -62,7 +62,7 @@ ccvx_plot_fit <- function(ccvx.samples, placebo.adjusted = FALSE,
   plot(x.vals, y.vals, type = 'n', 
        xlab = xlab, ylab = ylab,
        xlim = range(ccvx.samples$doses),
-       ylim = c(min(pci.ll), max(pci.ul)),
+       ylim = c(min(y.vals - abs(qnorm(delta)) * stderr), max(y.vals + abs(qnorm(delta)) * stderr)),
        main = paste0("Concavex Dose-Response Curve with \n", 100*cred.int.width, "% Credible Interval"))
   grid(lwd = 2)
   
