@@ -14,6 +14,7 @@ Function to plot Concavex model risk profiles by effect size and dose
 }
 \examples{
 ccvx.mod <- ccvx_build_jags()
-ccvx.samples <- ccvx_fit(ccvx.mod, doses = 0:4, mu.hat = c(1, 20, 50, 60, 65), stderr = rep(10, 5))
+ccvx.samples <- ccvx_fit(ccvx.mod, doses = 0:4, mu.hat = c(1, 20, 50, 60, 65), stderr = rep(20, 5))
+par(mfrow=c(1,2))
 ccvx_risk_profile(ccvx.samples)
 }
