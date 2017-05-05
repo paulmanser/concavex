@@ -16,7 +16,7 @@ ccvx_build_jags(prior.theta_0 = "theta_0 ~ dnorm(0, 1E-4)",
 \item{prior.lambda}{Prior for lambda specified in terms of JAGS code. The default is a non-informative uniform prior: 'lambda ~ dunif(-.999, .999)'}
 }
 \description{
-This function creates JAGS code within R for fitting the Concavex model. Has default non-informative priors for model parameters, but allows for specification of custom priors written in JAGS syntax
+This function creates JAGS code within R for fitting the Concavex model. It has default non-informative priors for model parameters, but allows for specification of custom priors written in JAGS syntax
 }
 \examples{
 ccvx.jags.mod <- ccvx_build_jags()

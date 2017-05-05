@@ -10,18 +10,18 @@ ccvx_fit(ccvx.mod, doses, mu.hat, stderr, n.chains = 4,
 \arguments{
 \item{ccvx.mod}{JAGS model file as specified by ccvx_build_jags()}
 
-\item{doses}{A vector of dose strengths}
+\item{doses}{A vector of dose strengths, with placebo listed first}
 
-\item{mu.hat}{A vector of parameter estimates for each dose}
+\item{mu.hat}{A vector of parameter estimates for each of the doses}
 
-\item{stderr}{A vector of standard errors for parameter estimates}
+\item{stderr}{A vector of standard errors for each of the doses}
 
-\item{n.chains}{Number of chains used to sample. Default is 4}
+\item{n.chains}{Number of chains used to for Gibbs sampling. Default is 4}
 
-\item{gibbs.samples}{Number of samples to draw for each chain. Default is 5000}
+\item{gibbs.samples}{Number of samples to draw for each chain after burn in. Default is 5000}
 }
 \description{
-This function samples from posterior densities of concavex model parameters as well as transformations of these parameters.
+This function samples from posterior densities of concavex model parameters as well as transformations of parameters.
 }
 \examples{
 ccvx.mod <- ccvx_build_jags()

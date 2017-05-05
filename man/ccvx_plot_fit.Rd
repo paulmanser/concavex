@@ -11,15 +11,15 @@ ccvx_plot_fit(ccvx.samples, placebo.adjusted = FALSE,
 \arguments{
 \item{ccvx.samples}{List containg Gibbs samples output by ccvx_fit() function}
 
-\item{placebo.adjusted}{Should estimate of dose-response curve be placebo adjusted? Default is FALSE}
+\item{placebo.adjusted}{Should the estimated dose-response curve be placebo adjusted? Default is FALSE}
 
 \item{title}{Plot title}
 
-\item{xlab}{Label for X-axis}
+\item{xlab}{Label for x-axis}
 
 \item{ylab}{Label for y-axis}
 
-\item{cred.int.width}{Specify width of credible interval for curve. Is also applied to confidence intervals of point estimates. Default is 0.9 (90\%)}
+\item{cred.int.width}{Specify width of credible interval for curve. This is also applied to confidence intervals of point estimates. Default is 0.9 (90\%)}
 }
 \description{
 Function to plot Concavex model fit overlaid on actual points
@@ -30,4 +30,7 @@ ccvx.samples <- ccvx_fit(ccvx.mod, doses = 0:4, mu.hat = c(1, 20, 50, 60, 65), s
 par(mfrow=c(1,2))
 ccvx_plot_fit(ccvx.samples, placebo.adjusted = FALSE)
 ccvx_plot_fit(ccvx.samples, placebo.adjusted = TRUE)
+}
+\author{
+Paul Manser, \email{manser.paul@gene.com}
 }

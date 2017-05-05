@@ -8,13 +8,17 @@ ccvx_risk_profile(ccvx.samples, eff.thresholds = NULL)
 }
 \arguments{
 \item{ccvx.samples}{List containg Gibbs samples output by ccvx_fit() function}
+
+\item{eff.thresholds}{A list of efficacy thresholds of specific interest for which to compute probabilities}
 }
 \description{
-Function to plot Concavex model risk profiles by effect size and dose
+Function to plot Concavex model risk profiles. Specifically, probabilities of exceeding efficacy thresholds
+are plotted against doses tested, and against specific thresholds of interest. If no thresholds are specified in 
+'eff.thresholds' argument, only the plot against dose is generated.
 }
 \examples{
 ccvx.mod <- ccvx_build_jags()
 ccvx.samples <- ccvx_fit(ccvx.mod, doses = 0:4, mu.hat = c(1, 20, 50, 60, 65), stderr = rep(20, 5))
 par(mfrow=c(1,2))
-ccvx_risk_profile(ccvx.samples)
+ccvx_risk_profile(ccvx.samples, eff.thresholds = c(5, 10, 20, 40))
 }

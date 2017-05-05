@@ -9,10 +9,10 @@ ccvx_hist_post(ccvx.samples, cred.int.width = 0.9)
 \arguments{
 \item{ccvx.samples}{List containg Gibbs samples output by ccvx_fit() function}
 
-\item{cred.int.width}{Specify width of credible interval for posteriors}
+\item{cred.int.width}{Specify width of credible interval for posteriors. Default is .9 (90\% credible interval)}
 }
 \description{
-This function plots the Concavex model fit overlaid with parameter estimates and standard errors for each dose
+This function plots posterior distributions for the 3 parameters of the Concavex model
 }
 \examples{
 ccvx.mod <- ccvx_build_jags()
