@@ -1,6 +1,6 @@
 #' Build Concavex JAGS code
 #' 
-#' This function creates JAGS code within R for fitting the Concavex model. Has default non-informative priors for model parameters, but allows for specification of custom priors written in JAGS syntax
+#' This function creates JAGS code within R for fitting the Concavex model. It has default non-informative priors for model parameters, but allows for specification of custom priors written in JAGS syntax
 #' 
 #' @param prior.theta_0  Prior for theta_0 specified in terms of JAGS code. The default is a non-informative normal prior: 'theta_0 ~ dnorm(0, 1E-4)'
 #' @param prior.theta_1  Prior for theta_1 specified in terms of JAGS code. The default is a non-informative normal prior: 'theta_1 ~ dnorm(0, 1E-4)'
