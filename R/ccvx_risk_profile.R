@@ -43,7 +43,6 @@ ccvx_risk_profile <- function(ccvx.samples, eff.thresholds = NULL) {
   # }
   
 
-  
   # p for tested doses ------------------------------------------------------
    
   doses <- ccvx.samples$doses
