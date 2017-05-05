@@ -1,13 +1,13 @@
 #' Sample from Concavex model posteriors
 #' 
-#' This function samples from posterior densities of concavex model parameters as well as transformations of these parameters. 
+#' This function samples from posterior densities of concavex model parameters as well as transformations of parameters.
 #' 
 #' @param ccvx.mod  JAGS model file as specified by ccvx_build_jags()
-#' @param doses A vector of dose strengths
-#' @param mu.hat A vector of parameter estimates for each dose
-#' @param stderr A vector of standard errors for parameter estimates
-#' @param n.chains Number of chains used to sample. Default is 4
-#' @param gibbs.samples Number of samples to draw for each chain. Default is 5000
+#' @param doses A vector of dose strengths, with placebo listed first
+#' @param mu.hat A vector of parameter estimates for each of the doses
+#' @param stderr A vector of standard errors for each of the doses
+#' @param n.chains Number of chains used to for Gibbs sampling. Default is 4
+#' @param gibbs.samples Number of samples to draw for each chain after burn in. Default is 5000
 #' 
 #' @export
 #' @examples 
@@ -22,7 +22,7 @@ ccvx_fit <- function(ccvx.mod, doses, mu.hat, stderr, n.chains = 4, gibbs.sample
   model.init <- jags.model(tc.ccvx,
                            data = list('dose' = doses / max(doses),
                                        'eff' = mu.hat,
-                                       'tau' = 1 / stderr^2,      # jags deals in precisions
+                                       'tau' = 1 / stderr^2,
                                        'pred.doses' = seq(0, 1, length.out = 250)),
                            n.chains = n.chains)
   close(tc.ccvx)
