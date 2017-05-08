@@ -55,7 +55,7 @@ ccvx_risk_profile <- function(ccvx.samples, eff.thresholds = NULL) {
 
   for(jj in 1:ncol(eff.mat)) {
     for(ii in 1:nrow(eff.mat)) {
-      eff.mat[ii, jj] <- mean(unlist(ccvx.samples$jags.samples$trt.dose.post[jj, , ]) > trt.eff.range[ii])
+      eff.mat[ii, jj] <- mean(unlist(ccvx.samples$jags.samples$trt.post.dose[jj, , ]) > trt.eff.range[ii])
     }
   }
 
