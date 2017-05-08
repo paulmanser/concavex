@@ -63,7 +63,7 @@ ccvx_plot_fit <- function(ccvx.samples, placebo.adjusted = FALSE,
        xlab = xlab, ylab = ylab,
        xlim = range(ccvx.samples$doses),
        ylim = c(min(y.vals - abs(qnorm(delta)) * std.err), max(y.vals + abs(qnorm(delta)) * std.err)),
-       main = paste0("Concavex Dose-Response Curve with \n", 100*cred.int.width, "% Credible Interval"))
+       main = paste0("Concavex D-R Curve with \n", 100*cred.int.width, "% Credible Interval"))
   grid(lwd = 2)
   
   points(x.vals, y.vals, pch = 16, cex = 1.3)
