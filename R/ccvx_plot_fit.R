@@ -12,7 +12,7 @@
 #' @export
 #' @examples 
 #' ccvx.mod <- ccvx_build_jags()
-#' ccvx.samples <- ccvx_fit(ccvx.mod, doses = 0:4, mu.hat = c(1, 20, 50, 60, 65), stderr = rep(10, 5))
+#' ccvx.samples <- ccvx_fit(ccvx.mod, doses = 0:4, mu.hat = c(1, 20, 50, 60, 65), std.err = rep(10, 5))
 #' par(mfrow=c(1,2))
 #' ccvx_plot_fit(ccvx.samples, placebo.adjusted = FALSE)
 #' ccvx_plot_fit(ccvx.samples, placebo.adjusted = TRUE)
@@ -43,7 +43,7 @@ ccvx_plot_fit <- function(ccvx.samples, placebo.adjusted = FALSE,
     y <- theta_0_median + theta_1_median * (((((1-lambda_median)/2)^2 + lambda_median)/(((1-lambda_median)/2)^2 + lambda_median*dose.range))*dose.range)
     y.vals <- ccvx.samples$mu.hat
     x.vals <- ccvx.samples$doses
-    stderr <- ccvx.samples$stderr
+    std.err <- ccvx.samples$std.err
   }
   
   if (placebo.adjusted){
@@ -55,22 +55,22 @@ ccvx_plot_fit <- function(ccvx.samples, placebo.adjusted = FALSE,
     y <- theta_1_median * (((((1-lambda_median)/2)^2 + lambda_median)/(((1-lambda_median)/2)^2 + lambda_median*dose.range))*dose.range)
     y.vals <- ccvx.samples$mu.hat[-1] - ccvx.samples$mu.hat[1]
     x.vals <- ccvx.samples$doses[-1]
-    stderr <- sqrt(ccvx.samples$stderr[1]^2 + (ccvx.samples$stderr[-1]^2))
+    std.err <- sqrt(ccvx.samples$std.err[1]^2 + (ccvx.samples$std.err[-1]^2))
   }
 
   # plot point estimates with std err bars
   plot(x.vals, y.vals, type = 'n', 
        xlab = xlab, ylab = ylab,
        xlim = range(ccvx.samples$doses),
-       ylim = c(min(y.vals - abs(qnorm(delta)) * stderr), max(y.vals + abs(qnorm(delta)) * stderr)),
+       ylim = c(min(y.vals - abs(qnorm(delta)) * std.err), max(y.vals + abs(qnorm(delta)) * std.err)),
        main = paste0("Concavex Dose-Response Curve with \n", 100*cred.int.width, "% Credible Interval"))
   grid(lwd = 2)
   
   points(x.vals, y.vals, pch = 16, cex = 1.3)
   arrows(x.vals, 
-         y.vals - abs(qnorm(delta)) * stderr, 
+         y.vals - abs(qnorm(delta)) * std.err, 
          x.vals, 
-         y.vals + abs(qnorm(delta)) * stderr, 
+         y.vals + abs(qnorm(delta)) * std.err, 
          length=0.05, angle=90, code=3, lwd = 2)
   
   # add ccvx model fit and credible interval
