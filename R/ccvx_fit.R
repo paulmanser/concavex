@@ -37,7 +37,8 @@ ccvx_fit <- function(ccvx.mod, doses, mu.hat, std.err, n.chains = 4, gibbs.sampl
   
   # gibbs sampling
   ccvx.samples <- jags.samples(model.init, 
-                               c("theta_0", "theta_1", "lambda", "mu.tilde", "dose.post", "trt.post"),
+                               c("theta_0", "theta_1", "lambda", "mu.tilde", 
+                                 "dose.post", "trt.post", "trt.post.dose"),
                                n.iter = gibbs.samples)
   
   # diagnostics with coda
