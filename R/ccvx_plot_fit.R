@@ -44,6 +44,7 @@ ccvx_plot_fit <- function(ccvx.samples, placebo.adjusted = FALSE,
     y.vals <- ccvx.samples$mu.hat
     x.vals <- ccvx.samples$doses
     std.err <- ccvx.samples$std.err
+    ylims <- c(min(y.vals - abs(qnorm(delta)) * std.err), max(y.vals + abs(qnorm(delta)) * std.err))
   }
   
   if (placebo.adjusted){
@@ -56,13 +57,14 @@ ccvx_plot_fit <- function(ccvx.samples, placebo.adjusted = FALSE,
     y.vals <- ccvx.samples$mu.hat[-1] - ccvx.samples$mu.hat[1]
     x.vals <- ccvx.samples$doses[-1]
     std.err <- sqrt(ccvx.samples$std.err[1]^2 + (ccvx.samples$std.err[-1]^2))
+    ylims <- c(min(c(0, y.vals - abs(qnorm(delta)) * std.err)), max(y.vals + abs(qnorm(delta)) * std.err))
   }
 
   # plot point estimates with std err bars
   plot(x.vals, y.vals, type = 'n', 
        xlab = xlab, ylab = ylab,
        xlim = range(ccvx.samples$doses),
-       ylim = c(min(y.vals - abs(qnorm(delta)) * std.err), max(y.vals + abs(qnorm(delta)) * std.err)),
+       ylim = ylims,
        main = paste0("Concavex D-R Curve with \n", 100*cred.int.width, "% Credible Interval"))
   grid(lwd = 2)
   
