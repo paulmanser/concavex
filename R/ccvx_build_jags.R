@@ -21,6 +21,7 @@ ccvx_build_jags <- function(prior.theta_0 = "theta_0 ~ dnorm(0, 1E-4)",
   if(predictive.probs){
     pred.prob.code <- 
     "
+    ## compute posterior predictive probabilities
     pred.pbo ~ dnorm(theta_0, tau.ph3)
       
     for(ii in 1:length(pred.doses)){
@@ -76,7 +77,6 @@ ccvx_build_jags <- function(prior.theta_0 = "theta_0 ~ dnorm(0, 1E-4)",
     }
   ",
   pred.prob.code,
-  
   
   "
   }
