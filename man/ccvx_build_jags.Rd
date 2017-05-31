@@ -6,7 +6,7 @@
 \usage{
 ccvx_build_jags(prior.theta_0 = "theta_0 ~ dnorm(0, 1E-4)",
   prior.theta_1 = "theta_1 ~ dnorm(0, 1E-4)",
-  prior.lambda = "lambda ~ dunif(-.999, .999)")
+  prior.lambda = "lambda ~ dunif(-.999, .999)", predictive.probs = FALSE)
 }
 \arguments{
 \item{prior.theta_0}{Prior for theta_0 specified in terms of JAGS code. The default is a non-informative normal prior: 'theta_0 ~ dnorm(0, 1E-4)'}
@@ -14,6 +14,8 @@ ccvx_build_jags(prior.theta_0 = "theta_0 ~ dnorm(0, 1E-4)",
 \item{prior.theta_1}{Prior for theta_1 specified in terms of JAGS code. The default is a non-informative normal prior: 'theta_1 ~ dnorm(0, 1E-4)'}
 
 \item{prior.lambda}{Prior for lambda specified in terms of JAGS code. The default is a non-informative uniform prior: 'lambda ~ dunif(-.999, .999)'}
+
+\item{predictive.probs}{Indicator for whether to compute posterior predictive probabilites for a future study. default is FALSE. if set to TRUE, the ccvx_fit function requires additional inputs}
 }
 \description{
 This function creates JAGS code within R for fitting the Concavex model. It has default non-informative priors for model parameters, but allows for specification of custom priors written in JAGS syntax
