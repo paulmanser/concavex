@@ -33,7 +33,7 @@ ccvx_fit <- function(ccvx.mod, doses, mu.hat, std.err, n.chains = 4, gibbs.sampl
   
   tc.ccvx <- textConnection(ccvx.mod)
 
-  if(!grep('trt.post.pred.dose', ccvx.mod)) {
+  if(!any(grep('trt.post.pred.dose', ccvx.mod))) {
   # initialize model
   model.init <- jags.model(tc.ccvx,
                            data = list('dose' = doses / max(doses),
