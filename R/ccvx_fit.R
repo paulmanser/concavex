@@ -21,9 +21,10 @@
 #' @examples 
 #' ccvx.mod <- ccvx_build_jags()
 #' ccvx.samples <- ccvx_fit(ccvx.mod, doses = 0:4, mu.hat = c(1, 20, 50, 60, 65), std.err = rep(10, 5))
+#' names(ccvx.samples$jags.samples)
 #' ccvx_plot_fit(ccvx.samples)
 
-ccvx_fit <- function(ccvx.mod, doses, mu.hat, std.err, n.chains = 4, gibbs.samples = 5000) {
+ccvx_fit <- function(ccvx.mod, doses, mu.hat, std.err, n.chains = 4, gibbs.samples = 5000, ) {
   
   tc.ccvx <- textConnection(ccvx.mod)
 

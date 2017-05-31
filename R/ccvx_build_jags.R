@@ -19,6 +19,8 @@ ccvx_build_jags <- function(prior.theta_0 = "theta_0 ~ dnorm(0, 1E-4)",
                             predictive.probs = FALSE) {
   
   if(predictive.probs){
+    cat("Including JAGS code to compute posterior predictive probabilities
+Please provide values for 'sd.ph3' and 'n.per.arm.ph3' arguments when using ccvx_fit()")
     pred.prob.code <- 
     "
     ## compute posterior predictive probabilities
