@@ -28,7 +28,7 @@
 
 ccvx_fit <- function(ccvx.mod, doses, mu.hat, std.err, n.chains = 4, gibbs.samples = 5000, sd.ph3 = NULL, n.per.arm.ph3 = NULL) {
   
-  if(grep('trt.post.pred.dose', ccvx.mod) & (is.null(sd.ph3) | is.null(n.per.arm.ph3)  ))
+  if(any(grep('trt.post.pred.dose', ccvx.mod)) & (is.null(sd.ph3) | is.null(n.per.arm.ph3)  ))
     stop("The 'ccvx.mod' JAGS script has been specified to compute posterior predictive probabilities. \n Please provide values for 'n.per.arm.ph3' and 'sd.ph3.'")
   
   tc.ccvx <- textConnection(ccvx.mod)
