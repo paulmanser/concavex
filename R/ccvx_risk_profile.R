@@ -10,7 +10,7 @@
 #' @export
 #' @examples 
 #' ccvx.mod <- ccvx_build_jags()
-#' ccvx.samples <- ccvx_fit(ccvx.mod, doses = 0:4, mu.hat = c(1, 20, 50, 60, 65), stderr = rep(20, 5))
+#' ccvx.samples <- ccvx_fit(ccvx.mod, doses = 0:4, mu.hat = c(1, 20, 50, 60, 65), std.err = rep(20, 5))
 #' par(mfrow=c(1,2))
 #' ccvx_risk_profile(ccvx.samples, eff.thresholds = c(5, 10, 20, 40))
 
@@ -29,9 +29,9 @@ ccvx_risk_profile <- function(ccvx.samples, eff.thresholds = NULL) {
       }
     }
   
-    plot(0, type = 'n', ylim = c(0, 1), xlim = range(ccvx.samples$doses),
+    plot(0, type = 'n', ylim = c(0, 1), xlim = range(ccvx.samples$doses), cex.lab = 1.4,
          ylab = "Probability",
-         main = "Probability of Exceeding Various Efficacy Thresholds \n by Threshold",
+         main = "Probability of Exceeding Efficacy Thresholds \n by Threshold",
          xlab = "Dose")
     grid(lwd = 2)
     
@@ -43,6 +43,7 @@ ccvx_risk_profile <- function(ccvx.samples, eff.thresholds = NULL) {
   
     legend("bottomright",
            legend = eff.thresholds,
+           title = "Threshold",
            fill = 1:length(eff.thresholds), border = NA)
   }
   
@@ -61,7 +62,7 @@ ccvx_risk_profile <- function(ccvx.samples, eff.thresholds = NULL) {
 
   plot(0, type = 'n', xlim = range(trt.eff.range), ylim = c(0, 1), cex.lab = 1.4,
        ylab = "Probability",
-       main = "Probability of Exceeding Various Efficacy Thresholds \n by Dose",
+       main = "Probability of Exceeding Efficacy Thresholds \n by Dose",
        xlab = "Treatment Effect over Placebo")
   
   grid(lwd=2)
@@ -70,7 +71,8 @@ ccvx_risk_profile <- function(ccvx.samples, eff.thresholds = NULL) {
     lines(trt.eff.range, eff.mat[, jj], col = jj, lwd = 2)
   }
 
-  legend("bottomleft", legend= doses, fill = 1:length(doses), border = NA)
+  legend("bottomleft", legend = doses, fill = 1:length(doses), border = NA,
+         title = "Dose")
 
 }
 

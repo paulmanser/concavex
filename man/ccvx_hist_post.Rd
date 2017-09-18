@@ -16,7 +16,7 @@ This function plots posterior distributions for the 3 parameters of the Concavex
 }
 \examples{
 ccvx.mod <- ccvx_build_jags()
-ccvx.samples <- ccvx_fit(ccvx.mod, doses = 0:4, mu.hat = c(1, 20, 50, 60, 65), stderr = rep(10, 5))
+ccvx.samples <- ccvx_fit(ccvx.mod, doses = 0:4, mu.hat = c(1, 20, 50, 60, 65), std.err = rep(10, 5))
 par(mfrow=c(1,3))
 ccvx_hist_post(ccvx.samples)
 }
