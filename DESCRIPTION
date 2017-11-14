@@ -9,6 +9,7 @@ Authors@R: c(person("Paul", "Manser", role = c("cre", "aut"),
 License: MIT
 Collate: concavex.R
          ccvx_build_jags.R
+         ccvx5_build_jags.R
          ccvx_fit.R
          ccvx_plot_fit.R
          ccvx_hist_post.R
