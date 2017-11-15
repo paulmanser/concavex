@@ -45,6 +45,8 @@ Please provide values for 'sd.ph3' and 'n.per.arm.ph3' arguments when using ccvx
   "
   model{
     
+    # 3-parameter concavex model
+
     # likelihood -------------------------------------------------------------
     
     for(ii in 1:length(dose)){
