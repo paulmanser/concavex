@@ -15,7 +15,7 @@ document should be printed (Default = FALSE)}
 }
 \description{
 This function allows the user the get access to pdf documents associated
-with this package.
+with this package. Associated pdf documents can be found using the \code{\link{available_docs}} function
 }
 \author{
 Kwame Okrah, \email{okrah.kwame@gene.com}
