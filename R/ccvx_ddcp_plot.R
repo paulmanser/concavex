@@ -13,6 +13,11 @@
 #' ccvx.samples <- ccvx_fit(ccvx.mod, doses = 0:4, mu.hat = c(1, 20, 50, 60, 65), std.err = rep(20, 5), sd.ph3 = 200, n.per.arm.ph3 = 300)
 #' par(mfrow=c(1,2))
 #' ccvx_ddcp_plot(ccvx.samples, eff.thresholds = c(-5, 0, 5, 10, 20, 40))
+#'
+#' ccvx.mod <- ccvx5_build_jags(predictive.probs = TRUE)
+#' ccvx.samples <- ccvx_fit(ccvx.mod, doses = 0:4, mu.hat = c(1, 20, 50, 60, 65), std.err = rep(20, 5), sd.ph3 = 200, n.per.arm.ph3 = 300)
+#' par(mfrow=c(1,2))
+#' ccvx_ddcp_plot(ccvx.samples, eff.thresholds = c(-5, 0, 5, 10, 20, 40))
 
 
 ccvx_ddcp_plot <- function(ccvx.samples, eff.thresholds = NULL) {
