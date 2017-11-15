@@ -8,6 +8,7 @@
 #' @param std.err A vector of standard errors for each of the doses
 #' @param n.chains Number of chains used to for Gibbs sampling. Default is 4
 #' @param gibbs.samples Number of samples to draw for each chain after burn in. Default is 5000
+#' @param burn.in Number of burn in samples to be drawn. Default is 1000
 #' @param sd.ph3 The standard deviation of the endpoint being assessed in phase 3. Only needs to be specified when ccvx_fit() computes posterior predictive probabilities (i.e. model-based DDCPs)
 #' @param n.per.arm.ph3 The number of patients per arm being assessed in hypothetical phase 3 study. Only needs to be specified when ccvx_fit() computes posterior predictive probabilities (i.e. model-based DDCPs)
 #' 
@@ -26,7 +27,8 @@
 #' names(ccvx.samples$jags.samples)
 #' ccvx_plot_fit(ccvx.samples)
 
-ccvx_fit <- function(ccvx.mod, doses, mu.hat, std.err, n.chains = 4, gibbs.samples = 5000, sd.ph3 = NULL, n.per.arm.ph3 = NULL) {
+ccvx_fit <- function(ccvx.mod, doses, mu.hat, std.err, n.chains = 4, gibbs.samples = 5000, burn.in = 1000,
+                     sd.ph3 = NULL, n.per.arm.ph3 = NULL) {
   
   if(any(grep('trt.post.pred.dose', ccvx.mod)) & (is.null(sd.ph3) | is.null(n.per.arm.ph3)  ))
     stop("The 'ccvx.mod' JAGS script has been specified to compute posterior predictive probabilities. \n Please provide values for 'n.per.arm.ph3' and 'sd.ph3.'")
@@ -71,7 +73,8 @@ ccvx_fit <- function(ccvx.mod, doses, mu.hat, std.err, n.chains = 4, gibbs.sampl
                                          'tau' = 1 / std.err^2,
                                          'pred.doses' = seq(0, 1, length.out = 250),
                                          'tau.ph3' = 1 / std.err.ph3^2),
-                             n.chains = n.chains)
+                             n.chains = n.chains,
+                             n.adapt = burn.in)
     
     # gibbs sampling
     ccvx.samples <- jags.samples(model.init, post.pred.vars, n.iter = gibbs.samples)
