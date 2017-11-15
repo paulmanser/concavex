@@ -7,29 +7,31 @@
 #' 
 #' 
 #' @section Functions:
-#' \link{ccvx_build_jags}    Build JAGS code for 3-parameter model
-#' \link{ccvx5_build_jags}   Build JAGS code for 5-parameter model
-#' \link{ccvx_fit}           Fit concavex model with JAGS Gibbs Sampler
-#' \link{ccvx_plot_fit}      Plot fitted model vs data
-#' \link{ccvx_hist_post}     Plot histograms of parameter posteriors
-#' \link{ccvx_risk_profile}  Plot risk profiles
-#' \link{ccvx_ddcp_plot}     Plot DDCP Phase 3 risks
-#' \link{available_docs}     List available supporting documentation
-#' \link{open_docs}          Open .pdf doc files listed in \link{available_docs}
-#'
-#' @section Examples
+#' \itemize{
+#' \item{\link{ccvx_build_jags}}    {Build JAGS code for 3-parameter model }
+#' \item{\link{ccvx5_build_jags}}   {Build JAGS code for 5-parameter model }
+#' \item{\link{ccvx_fit}}          {Fit concavex model with JAGS Gibbs Sampler }
+#' \item{\link{ccvx_plot_fit}}      {Plot fitted model vs data }
+#' \item{\link{ccvx_hist_post}}     {Plot histograms of parameter posteriors }
+#' \item{\link{ccvx_risk_profile}}  {Plot risk profiles }
+#' \item{\link{ccvx_ddcp_plot}}     {Plot DDCP Phase 3 risks }
+#' \item{\link{available_docs}}     {List available supporting documentation }
+#' \item{\link{open_doc}}          {Open .pdf doc files listed in \link{available_docs} }
+#' }
+#' @section Examples:
 #' 
-#' See Concavex User Guide for examples:
+#' Open User Guide for examples:
 #' 
 #' ## Not run:
 #' 
-#' open_docs("User Guide")
+#' open_doc("User Guide")
 #' 
 #' ## End (Not run)
 #'
-#' @section See Also
+#' @section See Also:
 #'
 #' Link to eventual concavex paper
+#' 
 #' Other Bayesian propaganda
 #'
 #' @docType package
