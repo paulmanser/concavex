@@ -29,7 +29,7 @@ ccvx_risk_profile <- function(ccvx.samples, eff.thresholds = NULL) {
       }
     }
   
-    plot(0, type = 'n', ylim = c(0, 1), xlim = range(ccvx.samples$doses), cex.lab = 1.4,
+    plot(0, type = 'n', ylim = c(0, 1), xlim = range(ccvx.samples$doses),
          ylab = "Probability",
          main = "Probability of Exceeding Efficacy Thresholds \n by Threshold",
          xlab = "Dose")
@@ -60,7 +60,7 @@ ccvx_risk_profile <- function(ccvx.samples, eff.thresholds = NULL) {
     }
   }
 
-  plot(0, type = 'n', xlim = range(trt.eff.range), ylim = c(0, 1), cex.lab = 1.4,
+  plot(0, type = 'n', xlim = range(trt.eff.range), ylim = c(0, 1), 
        ylab = "Probability",
        main = "Probability of Exceeding Efficacy Thresholds \n by Dose",
        xlab = "Treatment Effect over Placebo")
