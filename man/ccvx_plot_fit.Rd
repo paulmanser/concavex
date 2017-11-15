@@ -30,6 +30,12 @@ ccvx.samples <- ccvx_fit(ccvx.mod, doses = 0:4, mu.hat = c(1, 20, 50, 60, 65), s
 par(mfrow=c(1,2))
 ccvx_plot_fit(ccvx.samples, placebo.adjusted = FALSE)
 ccvx_plot_fit(ccvx.samples, placebo.adjusted = TRUE)
+
+ccvx.mod <- ccvx_build_jags()
+ccvx.samples <- ccvx_fit(ccvx.mod, doses = 0:4, mu.hat = c(1, 20, 50, 60, 65), std.err = rep(10, 5))
+par(mfrow=c(1,2))
+ccvx_plot_fit(ccvx.samples, placebo.adjusted = FALSE)
+ccvx_plot_fit(ccvx.samples, placebo.adjusted = TRUE)
 }
 \author{
 Paul Manser, \email{manser.paul@gene.com}
