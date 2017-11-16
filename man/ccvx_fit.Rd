@@ -5,7 +5,8 @@
 \title{Sample from Concavex model posteriors}
 \usage{
 ccvx_fit(ccvx.mod, doses, mu.hat, std.err, n.chains = 4,
-  gibbs.samples = 5000, sd.ph3 = NULL, n.per.arm.ph3 = NULL)
+  gibbs.samples = 5000, burn.in = 1000, sd.ph3 = NULL,
+  n.per.arm.ph3 = NULL)
 }
 \arguments{
 \item{ccvx.mod}{JAGS model file as specified by \link{ccvx_build_jags}}
@@ -19,6 +20,8 @@ ccvx_fit(ccvx.mod, doses, mu.hat, std.err, n.chains = 4,
 \item{n.chains}{Number of chains used to for Gibbs sampling. Default is 4}
 
 \item{gibbs.samples}{Number of samples to draw for each chain after burn in. Default is 5000}
+
+\item{burn.in}{Number of burn in samples to be drawn. Default is 1000}
 
 \item{sd.ph3}{The standard deviation of the endpoint being assessed in phase 3. Only needs to be specified when ccvx_fit() computes posterior predictive probabilities (i.e. model-based DDCPs)}
 
