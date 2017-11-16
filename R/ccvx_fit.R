@@ -60,7 +60,8 @@ ccvx_fit <- function(ccvx.mod, doses, mu.hat, std.err, n.chains = 4, gibbs.sampl
                                        'eff' = mu.hat,
                                        'tau' = 1 / std.err^2,
                                        'pred.doses' = seq(0, 1, length.out = 250)),
-                           n.chains = n.chains)
+                           n.chains = n.chains,
+                           n.adapt = burn.in)
   # gibbs sampling
   ccvx.samples <- jags.samples(model.init, post.vars, n.iter = gibbs.samples)
   
