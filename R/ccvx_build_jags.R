@@ -72,6 +72,7 @@ Please provide values for 'sd.ph3' and 'n.per.arm.ph3' arguments when using ccvx
     for(ii in 1:length(pred.doses)){
       mu.tilde[ii] <- theta_0 + theta_1 * (((((1-lambda)/2)^2 + lambda)/(((1-lambda)/2)^2 + lambda*pred.doses[ii]))*pred.doses[ii])
       trt.post[ii] <- theta_1 * (((((1-lambda)/2)^2 + lambda)/(((1-lambda)/2)^2 + lambda*pred.doses[ii]))*pred.doses[ii])
+      ed90[ii] <- ( (((((1-lambda)/2)^2 + lambda)/(((1-lambda)/2)^2 + lambda*pred.doses[ii]))*pred.doses[ii]) - .9 > 0 ) &&  ( theta_1 > 0 )
     }
     
     ## posterior distns for doses tested

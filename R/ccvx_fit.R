@@ -43,9 +43,9 @@ ccvx_fit <- function(ccvx.mod, doses, mu.hat, std.err, n.chains = 4, gibbs.sampl
     coda.vars <- c("theta_0", "theta_1", "gamma_1", "gamma_2", "alpha")
   }
   if(any(grep('3-parameter concavex model', ccvx.mod))){ 
-    post.vars <- c("theta_0", "theta_1", "lambda", "mu.tilde", "dose.post", "trt.post", "trt.post.dose")
+    post.vars <- c("theta_0", "theta_1", "lambda", "mu.tilde", "dose.post", "trt.post", "trt.post.dose", "ed90")
     
-    post.pred.vars <- c("theta_0", "theta_1", "lambda", "mu.tilde", "dose.post", "trt.post", "trt.post.dose",
+    post.pred.vars <- c("theta_0", "theta_1", "lambda", "mu.tilde", "dose.post", "trt.post", "trt.post.dose", "ed90",
                            "mu.tilde.pred", "trt.post.pred", "mu.tilde.pred.dose", "trt.post.pred.dose")
     
     coda.vars <- c("theta_0", "theta_1", "lambda")
