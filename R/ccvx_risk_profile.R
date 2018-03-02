@@ -1,8 +1,8 @@
 #' Plot Concavex model risk profiles 
 #' 
-#' Function to plot Concavex model risk profiles. Specifically, probabilities of not exceeding efficacy thresholds
-#' are plotted against doses tested, and against specific thresholds of interest. If no thresholds are specified in 
-#' 'eff.thresholds' argument, only the plot against dose is generated.
+#' Function to plot Concavex model risk profiles. Specifically, posterior probabilities of drug efficacy not exceeding 
+#' specific thresholds are plotted by doses tested, and for specific thresholds of interest. If no thresholds are specified in 
+#' 'eff.thresholds' argument, only the plot of doses against treatment effect is generated.
 #' 
 #' @param ccvx.samples List containg Gibbs samples output by ccvx_fit() function
 #' @param eff.thresholds A list of efficacy thresholds of specific interest for which to compute probabilities
@@ -12,7 +12,7 @@
 #' ccvx.mod <- ccvx_build_jags()
 #' ccvx.samples <- ccvx_fit(ccvx.mod, doses = 0:4, mu.hat = c(1, 20, 50, 60, 65), std.err = rep(20, 5))
 #' par(mfrow=c(1,2))
-#' ccvx_risk_profile(ccvx.samples, eff.thresholds = c(5, 10, 20, 40))
+#' ccvx_risk_profile(ccvx.samples), eff.thresholds = c(5, 10, 20, 40))
 
 
 ccvx_risk_profile <- function(ccvx.samples, eff.thresholds = NULL) {

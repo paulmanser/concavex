@@ -1,8 +1,8 @@
 #' Plot Concavex model posterior predictive risks for Phase 3 (AKA data-driven conditional probabilities)
 #' 
 #' Function to plot Concavex model risk profiles. Specifically, posterior predictive probabilities of not exceeding efficacy thresholds
-#' are plotted against doses tested, and against specific thresholds of interest. If no thresholds are specified in 
-#' 'eff.thresholds' argument, only the plot against dose is generated.
+#' are plotted by doses tested, and for specific thresholds of interest. If no thresholds are specified in 
+#' 'eff.thresholds' argument, only the plot of doses against treatment effect is generated.
 #' 
 #' @param ccvx.samples List containg Gibbs samples output by ccvx_fit() function
 #' @param eff.thresholds A list of efficacy thresholds of specific interest for which to compute probabilities
