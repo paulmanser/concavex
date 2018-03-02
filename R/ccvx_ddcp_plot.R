@@ -1,6 +1,6 @@
 #' Plot Concavex model posterior predictive risks for Phase 3 (AKA data-driven conditional probabilities)
 #' 
-#' Function to plot Concavex model risk profiles. Specifically, posterior predictive probabilities of exceeding efficacy thresholds
+#' Function to plot Concavex model risk profiles. Specifically, posterior predictive probabilities of not exceeding efficacy thresholds
 #' are plotted against doses tested, and against specific thresholds of interest. If no thresholds are specified in 
 #' 'eff.thresholds' argument, only the plot against dose is generated.
 #' 
@@ -10,11 +10,6 @@
 #' @export
 #' @examples 
 #' ccvx.mod <- ccvx_build_jags(predictive.probs = TRUE)
-#' ccvx.samples <- ccvx_fit(ccvx.mod, doses = 0:4, mu.hat = c(1, 20, 50, 60, 65), std.err = rep(20, 5), sd.ph3 = 200, n.per.arm.ph3 = 300)
-#' par(mfrow=c(1,2))
-#' ccvx_ddcp_plot(ccvx.samples, eff.thresholds = c(-5, 0, 5, 10, 20, 40))
-#'
-#' ccvx.mod <- ccvx5_build_jags(predictive.probs = TRUE)
 #' ccvx.samples <- ccvx_fit(ccvx.mod, doses = 0:4, mu.hat = c(1, 20, 50, 60, 65), std.err = rep(20, 5), sd.ph3 = 200, n.per.arm.ph3 = 300)
 #' par(mfrow=c(1,2))
 #' ccvx_ddcp_plot(ccvx.samples, eff.thresholds = c(-5, 0, 5, 10, 20, 40))
@@ -30,13 +25,13 @@ ccvx_ddcp_plot <- function(ccvx.samples, eff.thresholds = NULL) {
     
     for(jj in 1:ncol(eff.mat)) {
       for(ii in 1:nrow(eff.mat)) {
-        eff.mat[ii, jj] <- mean(unlist(ccvx.samples$jags.samples$trt.post.pred[ii, , ]) > eff.thresholds[jj])
+        eff.mat[ii, jj] <- mean(unlist(ccvx.samples$jags.samples$trt.post.pred[ii, , ]) < eff.thresholds[jj])
       }
     }
     
     plot(0, type = 'n', ylim = c(0, 1), xlim = range(ccvx.samples$doses),
          ylab = "Probability",
-         main = "Probability of Exceeding Efficacy Thresholds \n by Threshold",
+         main = "P(Not Exceeding Eff Thresholds) \n by Threshold",
          xlab = "Dose")
     grid(lwd = 2)
     
@@ -46,7 +41,7 @@ ccvx_ddcp_plot <- function(ccvx.samples, eff.thresholds = NULL) {
             col = jj, lwd = 2)
     }
     
-    legend("bottomright",
+    legend("topright",
            legend = eff.thresholds,
            title = "Threshold",
            fill = 1:length(eff.thresholds), border = NA)
@@ -61,13 +56,13 @@ ccvx_ddcp_plot <- function(ccvx.samples, eff.thresholds = NULL) {
   
   for(jj in 1:ncol(eff.mat)) {
     for(ii in 1:nrow(eff.mat)) {
-      eff.mat[ii, jj] <- mean(unlist(ccvx.samples$jags.samples$trt.post.pred.dose[jj, , ]) > trt.eff.range[ii])
+      eff.mat[ii, jj] <- mean(unlist(ccvx.samples$jags.samples$trt.post.pred.dose[jj, , ]) < trt.eff.range[ii])
     }
   }
   
   plot(0, type = 'n', xlim = range(trt.eff.range), ylim = c(0, 1), 
        ylab = "Probability",
-       main = "Probability of Exceeding Efficacy Thresholds \n by Dose",
+       main = "P(Not Exceeding Eff Thresholds) \n by Dose",
        xlab = "Treatment Effect over Placebo")
   
   grid(lwd=2)
@@ -76,7 +71,7 @@ ccvx_ddcp_plot <- function(ccvx.samples, eff.thresholds = NULL) {
     lines(trt.eff.range, eff.mat[, jj], col = jj, lwd = 2)
   }
   
-  legend("bottomleft", legend = doses, fill = 1:length(doses), border = NA,
+  legend("bottomright", legend = doses, fill = 1:length(doses), border = NA,
          title = "Dose")
   
 }

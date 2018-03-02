@@ -1,6 +1,6 @@
 #' Plot Concavex model risk profiles 
 #' 
-#' Function to plot Concavex model risk profiles. Specifically, probabilities of exceeding efficacy thresholds
+#' Function to plot Concavex model risk profiles. Specifically, probabilities of not exceeding efficacy thresholds
 #' are plotted against doses tested, and against specific thresholds of interest. If no thresholds are specified in 
 #' 'eff.thresholds' argument, only the plot against dose is generated.
 #' 
@@ -25,13 +25,13 @@ ccvx_risk_profile <- function(ccvx.samples, eff.thresholds = NULL) {
     
     for(jj in 1:ncol(eff.mat)) {
       for(ii in 1:nrow(eff.mat)) {
-        eff.mat[ii, jj] <- mean(unlist(ccvx.samples$jags.samples$trt.post[ii, , ]) > eff.thresholds[jj])
+        eff.mat[ii, jj] <- mean(unlist(ccvx.samples$jags.samples$trt.post[ii, , ]) < eff.thresholds[jj])
       }
     }
   
     plot(0, type = 'n', ylim = c(0, 1), xlim = range(ccvx.samples$doses),
          ylab = "Probability",
-         main = "Probability of Exceeding Efficacy Thresholds \n by Threshold",
+         main = "P(Not Exceeding Eff Thresholds) \n by Threshold",
          xlab = "Dose")
     grid(lwd = 2)
     
@@ -41,7 +41,7 @@ ccvx_risk_profile <- function(ccvx.samples, eff.thresholds = NULL) {
             col = jj, lwd = 2)
     }
   
-    legend("bottomright",
+    legend("topright",
            legend = eff.thresholds,
            title = "Threshold",
            fill = 1:length(eff.thresholds), border = NA)
@@ -56,13 +56,13 @@ ccvx_risk_profile <- function(ccvx.samples, eff.thresholds = NULL) {
 
   for(jj in 1:ncol(eff.mat)) {
     for(ii in 1:nrow(eff.mat)) {
-      eff.mat[ii, jj] <- mean(unlist(ccvx.samples$jags.samples$trt.post.dose[jj, , ]) > trt.eff.range[ii])
+      eff.mat[ii, jj] <- mean(unlist(ccvx.samples$jags.samples$trt.post.dose[jj, , ]) < trt.eff.range[ii])
     }
   }
 
   plot(0, type = 'n', xlim = range(trt.eff.range), ylim = c(0, 1), 
        ylab = "Probability",
-       main = "Probability of Exceeding Efficacy Thresholds \n by Dose",
+       main = "P(Not Exceeding Eff Thresholds) \n by Dose",
        xlab = "Treatment Effect over Placebo")
   
   grid(lwd=2)
@@ -71,7 +71,7 @@ ccvx_risk_profile <- function(ccvx.samples, eff.thresholds = NULL) {
     lines(trt.eff.range, eff.mat[, jj], col = jj, lwd = 2)
   }
 
-  legend("bottomleft", legend = doses, fill = 1:length(doses), border = NA,
+  legend("bottomright", legend = doses, fill = 1:length(doses), border = NA,
          title = "Dose")
 
 }
