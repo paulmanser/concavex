@@ -12,7 +12,7 @@
 #' ccvx.mod <- ccvx_build_jags()
 #' ccvx.samples <- ccvx_fit(ccvx.mod, doses = 0:4, mu.hat = c(1, 20, 50, 60, 65), std.err = rep(20, 5))
 #' par(mfrow=c(1,2))
-#' ccvx_risk_profile(ccvx.samples), eff.thresholds = c(5, 10, 20, 40))
+#' ccvx_risk_profile(ccvx.samples, eff.thresholds = c(5, 10, 20, 40))
 
 
 ccvx_risk_profile <- function(ccvx.samples, eff.thresholds = NULL) {

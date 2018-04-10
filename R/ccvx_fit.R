@@ -1,6 +1,6 @@
 #' Sample from Concavex model posteriors
 #' 
-#' This function samples from posterior densities of concavex model parameters as well as transformations of parameters.
+#' This function performs Gibbs sampling from posterior densities of concavex model parameters as well as transformations of parameters.
 #' 
 #' @param ccvx.mod  JAGS model file as specified by \link{ccvx_build_jags}
 #' @param doses A vector of dose strengths, with placebo listed first

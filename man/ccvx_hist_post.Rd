@@ -4,10 +4,13 @@
 \alias{ccvx_hist_post}
 \title{Plot Concavex model fit}
 \usage{
-ccvx_hist_post(ccvx.samples, cred.int.width = 0.9)
+ccvx_hist_post(ccvx.samples, params = c("theta_0", "theta_1", "lambda"),
+  cred.int.width = 0.9)
 }
 \arguments{
 \item{ccvx.samples}{List containg Gibbs samples output by ccvx_fit() function}
+
+\item{params}{Specify for which model parameters to show posterior densities. Allowable values are "theta_0", "theta_1", and "lambda"}
 
 \item{cred.int.width}{Specify width of credible interval for posteriors. Default is .9 (90\% credible interval)}
 }
@@ -18,10 +21,5 @@ This function plots posterior distributions for the 3 parameters of the Concavex
 ccvx.mod <- ccvx_build_jags()
 ccvx.samples <- ccvx_fit(ccvx.mod, doses = 0:4, mu.hat = c(1, 20, 50, 60, 65), std.err = rep(10, 5))
 par(mfrow=c(1, 3))
-ccvx_hist_post(ccvx.samples)
-
-#' ccvx.mod <- ccvx5_build_jags()
-ccvx.samples <- ccvx_fit(ccvx.mod, doses = 0:4, mu.hat = c(1, 20, 50, 60, 65), std.err = rep(10, 5))
-par(mfrow=c(2, 3))
-ccvx_hist_post(ccvx.samples)
+ccvx_hist_post(ccvx.samples, params = c("theta_0", "theta_1", "lambda"))
 }

@@ -37,7 +37,7 @@ A list with the elements
 \item{std.err}{A vector of standard errors for each of the doses}
 }
 \description{
-This function samples from posterior densities of concavex model parameters as well as transformations of parameters.
+This function performs Gibbs sampling from posterior densities of concavex model parameters as well as transformations of parameters.
 }
 \examples{
 ccvx.mod <- ccvx_build_jags()
