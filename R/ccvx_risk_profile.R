@@ -10,7 +10,7 @@
 #' @export
 #' @examples 
 #' ccvx.mod <- ccvx_build_jags()
-#' ccvx.samples <- ccvx_fit(ccvx.mod, doses = 0:4, mu.hat = c(1, 20, 50, 60, 65), std.err = rep(20, 5))
+#' ccvx.samples <- ccvx_fit(ccvx.mod, doses = c(0, 4, 7, 13, 20), mu.hat = c(1, 20, 50, 60, 65), std.err = rep(20, 5))
 #' par(mfrow=c(1,2))
 #' ccvx_risk_profile(ccvx.samples, eff.thresholds = c(5, 10, 20, 40))
 
@@ -54,7 +54,7 @@ ccvx_risk_profile <- function(ccvx.samples, eff.thresholds = NULL) {
 
   eff.mat <- matrix(nr = length(trt.eff.range), nc = length(doses))
 
-  for(jj in 1:ncol(eff.mat)) {
+  for(jj in 2:ncol(eff.mat)) {
     for(ii in 1:nrow(eff.mat)) {
       eff.mat[ii, jj] <- mean(unlist(ccvx.samples$jags.samples$trt.post.dose[jj, , ]) < trt.eff.range[ii])
     }
@@ -67,11 +67,11 @@ ccvx_risk_profile <- function(ccvx.samples, eff.thresholds = NULL) {
   
   grid(lwd=2)
 
-  for(jj in 1:ncol(eff.mat)) {
-    lines(trt.eff.range, eff.mat[, jj], col = jj, lwd = 2)
+  for(jj in 2:ncol(eff.mat)) {
+    lines(trt.eff.range, eff.mat[, jj], col = jj-1, lwd = 2)
   }
 
-  legend("bottomright", legend = doses, fill = 1:length(doses), border = NA,
+  legend("bottomright", legend = doses[(-1)], fill = 1:length(doses), border = NA,
          title = "Dose")
 
 }
